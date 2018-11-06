@@ -1,0 +1,102 @@
+<include src="../../libs/weToast/weToast.wxml" />
+
+<view class='background'></view>
+
+<!--加载中  -->
+<view class='loading-container' wx:if="{{LOADING}}">
+  <image src='/assets/load.svg'></image>
+</view>
+
+<!--导航栏  -->
+<vpush-view bindclickHandler="toTopHandler">
+  <view class='navigator' style='padding-top:{{STATUSBAR_HEIGHT}}px;background-color: rgba(3, 169, 244, {{opacity}});'>
+    <!--左边按钮  -->
+    
+    <view class='leftButton' hover-class='hover-class' bindtap='goBackHandler' wx:if="{{IS_SHARE_PAGE}}">
+      <image src='/assets/back.svg'></image>
+    </view>
+    <!-- <view class='leftButton' hover-class='hover-class' bindtap='gotoSetting' wx:else>
+        <image src='/assets/setting.svg'></image>
+      </view> -->
+    <!--中间标题  -->
+    <view class='title'>
+      <text>{{data.title}}</text>
+    </view>
+    <!--右边间隙  -->
+  </view>
+</vpush-view>
+<swiper style='height:{{HEIGHT}}px;' bindchange="onSwiperBindChange" current='{{}}'>
+  <swiper-item wx:for="{{datas}}" wx:for-item="data">
+    <scroll-view scroll-y bindscroll="scrollHandler" scroll-with-animation scroll-top="{{SCROLL_TOP}}" style='height:{{HEIGHT}}px;'>
+      <!--顶部图片  -->
+      <vpush-view bindclickHandler="viewImageHandler" data-url="{{data.img_url}}">
+        <image src='{{data.img_url}}' class='header_image'></image>
+      </vpush-view>
+      <view class='container'>
+        <!--主体  -->
+        <view class='body'>
+          <!--摄影作者  -->
+          <view class='pic_author'>
+            <text>{{data.picture_author}}</text>
+          </view>
+
+          <!--时间  -->
+          <view class='date'>
+            <text class='day'>{{data.date[2]}}</text>
+            <text class='other'>{{data.date[1]}} / {{data.date[0]}}</text>
+          </view>
+
+          <!--主体内容  -->
+          <vpush-view>
+            <view class="content">
+              <text>{{data.content}}</text>
+            </view>
+          </vpush-view>
+
+          <!--文字作者信息  -->
+          <view class='author'>
+            <text>—— {{data.text_authors}}</text>
+          </view>
+
+          <!--按钮  -->
+          <view class='action'>
+            <vpush-view bindclickHandler="toggleLikeHandler" class='action-cell'>
+              <view class="action-cell-button">
+                <view class='cell-icon' style='background: linear-gradient(135deg, #ff8058 0%, #ff5722 100%);'>
+                  <image src='{{data.islike ? "/assets/heart_full.svg" : "/assets/heart.svg"}}'></image>
+                </view>
+                <view class='cell-title'>
+                  <text>{{ data.islike ? '取消' : '喜欢'}}</text>
+                </view>
+              </view>
+            </vpush-view>
+            <!--转发  -->
+            <view class='action-cell'>
+              <button open-type='share' class='action-cell-button'>
+                <view class='cell-icon' style='background: linear-gradient(135deg, #46d2e4 0%, #00bcd4 100%);'>
+                  <image src='/assets/zhuanfa.svg'></image>
+                </view>
+                <view class='cell-title'>
+                  <text>转发</text>
+                </view>
+              </button>
+            </view>
+            <!--分享  -->
+            <view bindtap='shareHandler' data-id="{{data.id}}" data-index="{{index}}" class='action-cell'>
+              <button class='action-cell-button'>
+                <view class='cell-icon' style='background: linear-gradient(135deg, #73df77 0%, #4caf50 100%);'>
+                  <image src='/assets/share.svg'></image>
+                </view>
+                <view class='cell-title'>
+                  <text>分享</text>
+                </view>
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <!--分享图片canvas  -->
+    <canvas canvas-id="{{'shareCanvas'}}" style="width:414px;height:736px;opacity:0;position:fixed;left:-10000px;top:-10000px;"></canvas>
+  </swiper-item>
+</swiper>
