@@ -36,7 +36,8 @@ class API_OLD {
         picture_author: d.img_kind + ' | ' + d.img_author,
         date: d.date.split(' ')[0].replace(/-/g, ' / '),
         content: d.word,
-        text_authors: d.word_from
+        text_authors: d.word_from,
+        word_id: d.word_id
       })
     });
     return new_data;

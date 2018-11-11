@@ -25,7 +25,7 @@
     <!--右边间隙  -->
   </view>
 </vpush-view>
-<swiper style='height:{{HEIGHT}}px;' bindchange="onSwiperBindChange" current='{{}}'>
+<swiper style='height:{{HEIGHT}}px;' bindchange="onSwiperBindChange" current='{{current}}'>
   <swiper-item wx:for="{{datas}}" wx:for-item="data">
     <scroll-view scroll-y bindscroll="scrollHandler" scroll-with-animation scroll-top="{{SCROLL_TOP}}" style='height:{{HEIGHT}}px;'>
       <!--顶部图片  -->

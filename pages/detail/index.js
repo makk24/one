@@ -71,7 +71,7 @@ Page({
     }else{
       API.getData().then(datas => {
         datas.sort((a,b)=>{
-          return a.id>b.id
+          return a.word_id >b.word_id
         })
         datas.map(item => {
           item.date = item.date.split(' / ');
@@ -79,6 +79,7 @@ Page({
         })
         this.setData({
           datas: datas,
+          current:(datas.length-1)||0,
           HEIGHT: wx.getSystemInfoSync().windowHeight,
           IS_SHARE_PAGE: getCurrentPages().length > 1
         })
@@ -106,7 +107,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+   
   },
 
   /**
