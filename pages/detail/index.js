@@ -388,7 +388,7 @@ Page({
           // 判断是否是第一次分享，如果是，则显示帮助分享图片，否则只显示分享图片
           var urls = [ret.tempFilePath];
           if (IS_FIRST_SHARE < 3) {
-            urls.push('https://i.loli.net/2018/07/09/5b4341c50063e.jpg');
+            urls.push('http://img.cdeledu.com/FAQ/2018/1112/1541992269614-0_chg.jpg');
             wx.setStorageSync('share_count', IS_FIRST_SHARE + 1);
           }
           wx.previewImage({
