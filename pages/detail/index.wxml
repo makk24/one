@@ -25,7 +25,7 @@
     <!--右边间隙  -->
   </view>
 </vpush-view>
-<swiper style='height:{{HEIGHT}}px;' bindchange="onSwiperBindChange" current='{{current}}'>
+<swiper style='height:{{HEIGHT}}px;' bindchange="onSwiperBindChange" current='{{currentId}}'>
   <swiper-item wx:for="{{datas}}" wx:for-item="data">
     <scroll-view scroll-y bindscroll="scrollHandler" scroll-with-animation scroll-top="{{SCROLL_TOP}}" style='height:{{HEIGHT}}px;'>
       <!--顶部图片  -->
@@ -88,7 +88,7 @@
                   <image src='/assets/share.svg'></image>
                 </view>
                 <view class='cell-title'>
-                  <text>分享</text>
+                  <text>生成图片</text>
                 </view>
               </button>
             </view>

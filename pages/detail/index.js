@@ -79,7 +79,7 @@ Page({
         })
         this.setData({
           datas: datas,
-          current:(datas.length-1)||0,
+          currentId:(datas.length-1)||0,
           HEIGHT: wx.getSystemInfoSync().windowHeight,
           IS_SHARE_PAGE: getCurrentPages().length > 1
         })
@@ -141,9 +141,9 @@ Page({
    */
   onShareAppMessage: function() {
     return {
-      title: this.data.data.title,
-      imageUrl: this.data.data.img_url,
-      path: '/pages/detail/index?id=' + this.data.data.id
+      title: this.data.datas[this.data.currentId].content,
+      imageUrl: this.data.datas[this.data.currentId].img_url,
+      path: '/pages/detail/index?id=' + this.data.datas[this.data.currentId].id
     }
   },
 
