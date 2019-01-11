@@ -100,3 +100,7 @@
     <canvas canvas-id="{{'shareCanvas'}}" style="width:414px;height:736px;opacity:0;position:fixed;left:-10000px;top:-10000px;"></canvas>
   </swiper-item>
 </swiper>
+<!-- <form  report-submit="{{true}}" bindsubmit="getformid">
+<text selectable='{{true}}'>{{formid}}</text>
+<button form-type="submit">Submit</button>
+</form> -->

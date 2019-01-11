@@ -28,6 +28,17 @@ Page({
     STATUSBAR_HEIGHT: INFO.statusBarHeight,
     currentId:0
   },
+  getformid:function(e){
+    wx.login({
+      success:function(e){
+        console.log(e)
+      }
+    })
+    console.log(e)
+    this.setData({
+      formid: e.detail.formId
+    })
+  },
   /**
    * swiper切换事件
    */
@@ -71,7 +82,7 @@ Page({
     }else{
       API.getData().then(datas => {
         datas.sort((a,b)=>{
-          return a.word_id >b.word_id
+          return a.date > b.date
         })
         datas.map(item => {
           item.date = item.date.split(' / ');
