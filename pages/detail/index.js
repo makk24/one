@@ -311,15 +311,15 @@ Page({
 
 
       // 一行多少字
-      var NUMBER_OF_LINE = 15;
+      var NUMBER_OF_LINE = 18;
       // 每个字多宽
-      var FONT_WIDTH = 22;
+      var FONT_WIDTH =18;
       // 1. 进行分割，获取前三行
       var c_temps = content.split('\r\n');
       var line_counts = 0;
       // 如果超过三行，那么只取前三行
-      if (c_temps.length > 3) {
-        c_temps = c_temps.slice(0, 3);
+      if (c_temps.length > 4) {
+        c_temps = c_temps.slice(0, 4);
       }
 
       for (var i in c_temps) {
@@ -338,14 +338,14 @@ Page({
         // 如果line > 3，则忽略
         // 因为line从0开始
         // 如果最后一行，并且文字还是那么多，那么就省略号代替
-        if (line === 2 && text.length === NUMBER_OF_LINE) {
+        if (line === 3 && text.length === NUMBER_OF_LINE) {
           text = text.slice(0, 13) + '..';
-        } else if (line > 2) {
+        } else if (line > 3) {
           return;
         }
         var y = 450 + (line * 35); // 200为文字初始y坐标
         console.log('[draw]', text, y);
-        ctx.setFontSize(20);
+        ctx.setFontSize(18);
         ctx.setTextAlign('center');
         ctx.setFillStyle('#333333');
         for (var i in text) {

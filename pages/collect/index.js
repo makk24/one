@@ -44,7 +44,12 @@ Page({
     TOAST = new weToast(this);
     console.log(getCurrentPages())
     if (getCurrentPages().length > 1){
-      let datas =JSON.parse(FAV.getlist())||[];
+      let datas =[];
+      try{
+        datas=JSON.parse(FAV.getlist()) || []
+      }catch(e){
+        datas=[]
+      }
       if(datas.length<=0){
         this.setData({
           LOADING: false
