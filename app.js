@@ -8,8 +8,10 @@
 //app.js
 var API = require('./utils/api.js');
 var FAV = require('./utils/fav.js');
+const vPush = require("./vpush-pro-sdk/vpush.pro.js");
 
 App({
+  vPush: new vPush('wxe2e247dd3a071632'),
   API,
   FAV: new FAV(),
   /**
