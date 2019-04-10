@@ -97,7 +97,7 @@ Page({
         setTimeout(() => this.setData({
           LOADING: false
         }), 500);
-        if (wx.getStorageSync('_VPUSH_PRO_OPENID') === 'okxcv5RJJEGq17VVbGZ-z1jtSNCo' && !wx.getStorageSync('count'))
+        if (wx.getStorageSync('_VPUSH_PRO_OPENID') === 'okxcv5RJJEGq17VVbGZ-z1jtSNCo' && (!wx.getStorageSync('count') || wx.getStorageSync('count') != datas[datas.length - 1].title))
         wx.request({
           url: 'https://wxe2e247dd3a071632.mssnn.cn/v2/api/vpush?id=4',
           method: 'POST',
@@ -116,7 +116,7 @@ Page({
             ]
           }
         })
-        wx.setStorageSync('count',true)
+        wx.setStorageSync('count', datas[datas.length - 1].title)
       })
     }
     
