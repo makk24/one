@@ -30,14 +30,15 @@ class API_OLD {
     var new_data = [];
     data.map(function (d) {
       new_data.push({
-        id: d.id,
-        title: d.vol,
-        img_url: d.img_url,
-        picture_author: d.img_kind + ' | ' + d.img_author,
-        date: d.date.split(' ')[0].replace(/-/g, ' / '),
-        content: d.word,
-        text_authors: d.word_from,
-        word_id: d.word_id
+        id: d.hpcontent_id,
+        title: d.hp_title,
+        img_url: d.hp_img_url,
+        picture_author: d.hp_author,
+        date: d.hp_makettime.split(' ')[0].replace(/-/g, ' / '),
+        content: d.hp_content,
+        text_authors: d.text_authors,
+        word_id: d.author_id,
+        maketime: d.maketime
       })
     });
     return new_data;
@@ -53,7 +54,7 @@ class API_OLD {
       if (HAS_CACHE !== false) return RES(HAS_CACHE);
       // 请求数据
       wx.request({
-        url: this.API,
+        url: "https://makunkun.cn/hp/more",
         method: 'POST',
         dataType: 'json',
         data: {
@@ -62,7 +63,10 @@ class API_OLD {
           'Body': ''
         },
         success: ret => {
-          var datas = this.formatData(ret.data.Body);
+          console.log(ret)
+          let data = ret.data.data||[]
+          data.reverse()
+          var datas = this.formatData(data);
           // 存储缓存
           wx.setStorageSync(this.KEY, datas);
           RES(datas);
@@ -77,7 +81,7 @@ class API_OLD {
    */
   getCache () {
     var datas = wx.getStorageSync(this.KEY);
-    if (!datas) return false;
+    if (!datas || datas.length==0) return false;
     // 判断时间
     var data = datas[0];
     if (data.date === new Date().format('yyyy / MM / dd')) return datas;

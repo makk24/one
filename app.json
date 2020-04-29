@@ -4,30 +4,39 @@
     "pages/home/index",
     "pages/setting/index",
     "pages/collect/index",
-    "pages/setting/openSource"
+    "pages/setting/openSource",
+    "pages/ence_push/ence_push"
   ],
   "tabBar": {
     "color": "#999999",
     "selectedColor": "#32AFFA",
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
-    "list": [{
-      "pagePath": "pages/detail/index",
-      "text": "ONE",
-      "iconPath": "/assets/home_default.png",
-      "selectedIconPath": "/assets/home_selected.png"
-    },{
-      "pagePath": "pages/setting/index",
-      "text": "SET",
-      "iconPath": "/assets/btn_default_my.png",
-      "selectedIconPath": "/assets/btn_selected_my.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/detail/index",
+        "text": "ONE",
+        "iconPath": "/assets/home_default.png",
+        "selectedIconPath": "/assets/home_selected.png"
+      },
+      {
+        "pagePath": "pages/setting/index",
+        "text": "SET",
+        "iconPath": "/assets/btn_default_my.png",
+        "selectedIconPath": "/assets/btn_selected_my.png"
+      }
+    ]
   },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "white",
-    "navigationStyle": "custom"
-  }
+    "navigationBarTitleText": "one阅读",
+    "navigationBarTextStyle": "black"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx34e13c37e0ae2675",
+    "wx6f8db60e5cc9d60b",
+    "wxc75a272b3dc133ca"
+  ],
+  "sitemapLocation": "sitemap.json"
 }

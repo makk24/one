@@ -6,18 +6,21 @@
  */
 
 //app.js
+require('./utils/push_sdk.js')
 var API = require('./utils/api.js');
 var FAV = require('./utils/fav.js');
-const vPush = require("./vpush-pro-sdk/vpush.pro.js");
-
 App({
-  vPush: new vPush('wxe2e247dd3a071632'),
   API,
   FAV: new FAV(),
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
+    wx.login({
+      success(res){
+        console.log(res)
+      }
+    })
   },
 
   /**
@@ -27,6 +30,18 @@ App({
     if (wx.canIUse('getUpdateManager')) {
       this.checkForUpdateApp();
     }
+    wx.login({
+      success(res){
+        wx.request({
+          url: `https://makunkun.cn/wx/getUser?appid=wxe2e247dd3a071632&code=${res.code}`,
+          success(res){
+            if (res.data.openid){
+              wx.aldPushSendOpenid(res.data.openid)
+            }
+          }
+        })
+      }
+    })
   },
   checkForUpdateApp() {
     const updateManager = wx.getUpdateManager()

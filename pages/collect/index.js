@@ -252,7 +252,6 @@ Page({
     }
     wx.showLoading({
       title: '稍等，马上好！',
-      mask: true
     });
 
     var ctx = wx.createCanvasContext('shareCanvas', this);
@@ -270,13 +269,22 @@ Page({
     } = this.data.datas[index];
     new Promise(RES => {
       // 下载图片
-      wx.getImageInfo({
-        src: img_url.replace('http://image.wufazhuce.com', 'https://weapp.safedog.cc'),
-        success: ret => {
-          ctx.drawImage(ret.path, 0, 0, 414, 276);
-          // 渲染模板图片
-          ctx.drawImage('/assets/box@2x.png', 0, 174, 414, 562);
-          RES();
+      // 下载图片
+      wx.request({
+        url: 'https://makunkun.cn/getimg?url=' + e.currentTarget.dataset.img,
+        success(res) {
+          wx.getImageInfo({
+            src: 'https://makunkun.cn' + res.data.url,
+            success: ret => {
+              ctx.drawImage(ret.path, 0, 0, 414, 276);
+              // 渲染模板图片
+              ctx.drawImage('/assets/box@2x.png', 0, 174, 414, 562);
+              RES();
+            },
+            fail: function (err) {
+              console.log(err);
+            }
+          })
         }
       })
     }).then(() => new Promise(RES => {

@@ -28,6 +28,35 @@ Page({
     STATUSBAR_HEIGHT: INFO.statusBarHeight,
     currentId:0
   },
+  getsub(){
+    wx.aldPushSubscribeMessage({
+      eventId: '5ea956c56df4251c4a09a4d0',
+      success(res) {
+        // 成功后的回调函数
+        console.log(res)
+      },
+      fail(res, e) {
+        // 失败后的回调函数
+        console.log(res)
+        console.log(e)
+      }
+    });
+  },
+  getsub1() {
+    wx.aldPushSubscribeMessage({
+      eventId: '5ea95a796df4251c4a09a4d1',
+      success(res) {
+        // 成功后的回调函数
+        console.log(res)
+      },
+      fail(res, e) {
+        // 失败后的回调函数
+        console.log(res)
+        console.log(e)
+      }
+    });
+  },
+
   getformid:function(e){
     wx.login({
       success:function(e){
@@ -81,9 +110,7 @@ Page({
       }), 500);
     }else{
       API.getData().then(datas => {
-        datas.sort((a,b)=>{
-          return a.date > b.date
-        })
+        
         datas.map(item => {
           item.date = item.date.split(' / ');
           item.islike = FAV.check(item.id);
@@ -97,25 +124,25 @@ Page({
         setTimeout(() => this.setData({
           LOADING: false
         }), 500);
-        if (wx.getStorageSync('_VPUSH_PRO_OPENID') === 'okxcv5RJJEGq17VVbGZ-z1jtSNCo' && (!wx.getStorageSync('count') || wx.getStorageSync('count') != datas[datas.length - 1].title))
-        wx.request({
-          url: 'https://wxe2e247dd3a071632.mssnn.cn/v2/api/vpush?id=4',
-          method: 'POST',
-          dataType: 'json',
-          header: {
-            'Content-Type': "application/json"
-          },
-          data: {
-            "secret": "ec7a8-236c6-69644-30255",
-            "path": "pages/detail/index",
-            "data": [
-              datas[datas.length - 1].title,
-              datas[datas.length - 1].content,
-              Math.ceil(Math.random() * 100),
-              "小决心提醒你该去行动了"
-            ]
-          }
-        })
+        // if (wx.getStorageSync('_VPUSH_PRO_OPENID') === 'okxcv5RJJEGq17VVbGZ-z1jtSNCo' && (!wx.getStorageSync('count') || wx.getStorageSync('count') != datas[datas.length - 1].title))
+        // wx.request({
+        //   url: 'https://wxe2e247dd3a071632.mssnn.cn/v2/api/vpush?id=4',
+        //   method: 'POST',
+        //   dataType: 'json',
+        //   header: {
+        //     'Content-Type': "application/json"
+        //   },
+        //   data: {
+        //     "secret": "ec7a8-236c6-69644-30255",
+        //     "path": "pages/detail/index",
+        //     "data": [
+        //       datas[datas.length - 1].title,
+        //       datas[datas.length - 1].content,
+        //       Math.ceil(Math.random() * 100),
+        //       "小决心提醒你该去行动了"
+        //     ]
+        //   }
+        // })
         wx.setStorageSync('count', datas[datas.length - 1].title)
       })
     }
@@ -127,46 +154,6 @@ Page({
       url: '/pages/setting/index',
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-   
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
   /**
    * 用户点击右上角分享
    */
@@ -242,6 +229,7 @@ Page({
    * 喜欢/取消
    */
   toggleLikeHandler: function(e) {
+    this.getsub1();
     var 
       data
      = this.data.datas[this.data.currentId];
@@ -277,7 +265,6 @@ Page({
     }
     wx.showLoading({
       title: '稍等，马上好！',
-      mask: true
     });
 
     var ctx = wx.createCanvasContext('shareCanvas', this);
@@ -295,15 +282,24 @@ Page({
     } = this.data.datas[index];
     new Promise(RES => {
       // 下载图片
-      wx.getImageInfo({
-        src: img_url.replace('http://image.wufazhuce.com', 'https://weapp.safedog.cc'),
-        success: ret => {
-          ctx.drawImage(ret.path, 0, 0, 414, 276);
-          // 渲染模板图片
-          ctx.drawImage('/assets/box@2x.png', 0, 174, 414, 562);
-          RES();
+      wx.request({
+        url: 'https://makunkun.cn/getimg?url=' + e.currentTarget.dataset.img,
+        success(res){
+          wx.getImageInfo({
+            src: 'https://makunkun.cn'+res.data.url,
+            success: ret => {
+              ctx.drawImage(ret.path, 0, 0, 414, 276);
+              // 渲染模板图片
+              ctx.drawImage('/assets/box@2x.png', 0, 174, 414, 562);
+              RES();
+            },
+            fail: function (err) {
+              console.log(err);
+            }
+          })
         }
       })
+      
     }).then(() => new Promise(RES => {
       // // 下载动态二维码
       // wx.getImageInfo({

@@ -108,15 +108,13 @@
 
 .action {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border-top: 1px solid rgba(238, 238, 238, 0.5);
   margin: 20px;
   padding: 20px 0px;
 }
 .action-cell {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
