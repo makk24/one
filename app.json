@@ -4,7 +4,8 @@
     "pages/home/index",
     "pages/setting/index",
     "pages/collect/index",
-    "pages/setting/openSource"
+    "pages/setting/openSource",
+    "pages/ence_push/ence_push"
   ],
   "tabBar": {
     "color": "#999999",
@@ -29,9 +30,13 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "white",
-    "navigationStyle": "custom"
+    "navigationBarTitleText": "one阅读",
+    "navigationBarTextStyle": "black"
   },
+  "navigateToMiniProgramAppIdList": [
+    "wx34e13c37e0ae2675",
+    "wx6f8db60e5cc9d60b",
+    "wxc75a272b3dc133ca"
+  ],
   "sitemapLocation": "sitemap.json"
 }

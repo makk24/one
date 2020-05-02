@@ -7,24 +7,6 @@
   <image src='/assets/load.svg'></image>
 </view>
 
-<!--导航栏  -->
-<vpush-view bindclickHandler="toTopHandler">
-  <view class='navigator' style='padding-top:{{STATUSBAR_HEIGHT}}px;background-color: rgba(3, 169, 244, {{opacity}});'>
-    <!--左边按钮  -->
-    
-    <view class='leftButton' hover-class='hover-class' bindtap='goBackHandler' wx:if="{{IS_SHARE_PAGE}}">
-      <image src='/assets/back.svg'></image>
-    </view>
-    <!-- <view class='leftButton' hover-class='hover-class' bindtap='gotoSetting' wx:else>
-        <image src='/assets/setting.svg'></image>
-      </view> -->
-    <!--中间标题  -->
-    <view class='title'>
-      <text>{{data.title}}</text>
-    </view>
-    <!--右边间隙  -->
-  </view>
-</vpush-view>
 <swiper style='height:{{HEIGHT}}px;' bindchange="onSwiperBindChange" current='{{}}'>
   <swiper-item wx:for="{{datas}}" wx:for-item="data">
     <scroll-view scroll-y bindscroll="scrollHandler" scroll-with-animation scroll-top="{{SCROLL_TOP}}" style='height:{{HEIGHT}}px;'>
@@ -82,7 +64,7 @@
               </button>
             </view>
             <!--分享  -->
-            <view bindtap='shareHandler' data-id="{{data.id}}" data-index="{{index}}" class='action-cell'>
+            <view bindtap='shareHandler' data-id="{{data.id}}" data-index="{{index}}" class='action-cell' data-img="{{data.img_url}}">
               <button class='action-cell-button'>
                 <view class='cell-icon' style='background: linear-gradient(135deg, #73df77 0%, #4caf50 100%);'>
                   <image src='/assets/share.svg'></image>
