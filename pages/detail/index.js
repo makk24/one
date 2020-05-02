@@ -276,7 +276,7 @@ Page({
     new Promise(RES => {
       // 下载图片
       wx.getImageInfo({
-        src: img_url.replace('http://image.wufazhuce.com', 'https://weapp.safedog.cc'),
+        src: img_url,//.replace('http://image.wufazhuce.com', 'https://weapp.safedog.cc')
         success: ret => {
           ctx.drawImage(ret.path, 0, 0, 414, 276);
           // 渲染模板图片
