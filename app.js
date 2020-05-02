@@ -10,6 +10,7 @@ require('./utils/push_sdk.js')
 var API = require('./utils/api.js');
 var FAV = require('./utils/fav.js');
 App({
+  config: require('./utils/config.js'),
   API,
   FAV: new FAV(),
   /**

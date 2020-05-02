@@ -6,7 +6,7 @@ var {
 } = getApp();
 var weToast = require('../../libs/weToast/weToast.js');
 var TOAST;
-
+var app=getApp();
 Page({
 
   /**
@@ -29,38 +29,49 @@ Page({
     currentId:0
   },
   getsub(){
+    let isshow = wx.getStorageSync(app.config.config.isshow) || 0;
+    if (isshow != new Date().getDate()) {
     wx.aldPushSubscribeMessage({
       eventId: '5ea956c56df4251c4a09a4d0',
       success(res) {
         // 成功后的回调函数
         console.log(res)
+        wx.setStorageSync(app.config.config.isshow, new Date().getDate())
       },
       fail(res, e) {
         // 失败后的回调函数
         console.log(res)
         console.log(e)
+        wx.setStorageSync(app.config.config.isshow, new Date().getDate())
       }
     });
+    }
   },
   getsub1() {
+      let isshow = wx.getStorageSync(app.config.config.isshow) || 0;
+      if (isshow != new Date().getDate()) {
     wx.aldPushSubscribeMessage({
       eventId: '5ea95a796df4251c4a09a4d1',
       success(res) {
         // 成功后的回调函数
         console.log(res)
+        wx.setStorageSync(app.config.config.isshow, new Date().getDate())
       },
       fail(res, e) {
         // 失败后的回调函数
         console.log(res)
         console.log(e)
+        wx.setStorageSync(app.config.config.isshow, new Date().getDate())
       }
     });
+      }
   },
 
   getformid:function(e){
     wx.login({
       success:function(e){
         console.log(e)
+        
       }
     })
     console.log(e)
